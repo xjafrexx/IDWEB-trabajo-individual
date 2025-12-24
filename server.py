@@ -1,32 +1,37 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 import os
 
 # Configuración básica de Flask
 app = Flask(__name__)
-DB_NAME = "valorant_fan.db"
 
-# Función para iniciar la base de datos
-def init_db():
-    try:
-        conn = sqlite3.connect(DB_NAME)
-        cursor = conn.cursor()
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS mensajes (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nombre TEXT NOT NULL,
-                email TEXT NOT NULL,
-                mensaje TEXT NOT NULL,
-                fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        ''')
-        conn.commit()
-        conn.close()
-        print("Base de datos lista.")
-    except Exception as e:
-        print(f"Error DB: {e}")
+uri = os.getenv("DATABASE_URL")
 
-init_db()
+if uri and uri.startswith("postgres://"):
+  uri = uri.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Mensaje(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  nombre = db.Column(db.String(100), nullable=False)
+  email = db.Column(db.String(100), nullable=False)
+  mensaje = db.Column(db.Text, nullable=False)
+
+if not uri:
+  raise RuntimeError("DATABASE_URL no está configurada en variables de entorno.")
+
+try:
+  with app.app_context():
+    db.create_all()
+    print("Tablas listas (create_all).")
+except Exception as e:
+  print("Error creando tablas:", e)
+  raise
 
 # --- Rutas de las páginas (archivos en carpeta templates) ---
 
@@ -58,23 +63,26 @@ def registro():
 @app.route('/enviar-mensaje', methods=['POST'])
 def enviar_mensaje():
     if request.method == 'POST':
-        try:
-            nombre = request.form['nombre']
-            email = request.form['email']
-            mensaje = request.form['mensaje']
+    nombre = request.form['nombre']
+    presupuesto = float(request.form['presupuesto'])
+    correo = request.form['correo']
+    mensaje = request.form['mensaje']
 
-            conn = sqlite3.connect(DB_NAME)
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO mensajes (nombre, email, mensaje) VALUES (?, ?, ?)", 
-                           (nombre, email, mensaje))
-            conn.commit()
-            conn.close()
-            
-            return redirect(url_for('contacto'))
-        except:
-            return "Error al guardar mensaje"
+    nuevo_mensaje = Mensaje(
+      nombre=nombre,
+      presupuesto=presupuesto,
+      correo=correo,
+      mensaje=mensaje
+    )
+
+    try:
+      db.session.add(nuevo_mensaje)
+      db.session.commit()
+      return redirect(url_for('contacto'))
+    except Exception as e:
+      db.session.rollback()
+    return f"Ocurrió un error al enviar el mensaje: {e}"
 
 # Configuración para Render
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
