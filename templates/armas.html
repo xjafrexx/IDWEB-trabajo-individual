@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armas - Valorant Fan</title>
+    <link rel="stylesheet" href="../static/css/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="pagina-armas">
+
+    <nav>
+        <a href="index.html" class="logo">VALORANT <span>FAN</span></a>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="agentes.html">Agentes</a></li>
+            <li><a href="armas.html">Armas</a></li>
+            <li><a href="contacto.html">Contacto Dev</a></li>
+            <li><a href="registro.html" class="btn-registro">Registrarse</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h1>ARSENAL TÁCTICO</h1>
+        
+        <div class="buscador-container">
+            <input type="text" id="buscador" class="input-buscador" placeholder="Buscar arma (ej. Vandal, Operator)...">
+        </div>
+
+        <div class="filtros-container">
+            <button class="btn-filtro activo" onclick="filtrar('todos')">Todas</button>
+            <button class="btn-filtro" onclick="filtrar('Rifle')">Rifles</button>
+            <button class="btn-filtro" onclick="filtrar('Sniper')">Snipers</button>
+            <button class="btn-filtro" onclick="filtrar('Heavy')">Pesadas</button>
+            <button class="btn-filtro" onclick="filtrar('Sidearm')">Pistolas</button>
+        </div>
+
+        <div id="contenido-dinamico" class="grid-container">
+            <p style="color: white;">Cargando arsenal...</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/valorantlatam/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/valorantlatam" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p class="footer-text">
+            © 2025 Valorant Project - <strong>Proyecto Universitario Académico</strong>
+        </p>
+    </footer>
+
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

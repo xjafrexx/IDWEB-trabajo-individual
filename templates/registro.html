@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Valorant Fan</title>
+    <link rel="stylesheet" href="../static/css/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Estilos específicos para esta página (Caja de aviso) */
+        .registro-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1; /* Ocupa todo el espacio vertical disponible */
+            padding: 20px;
+        }
+
+        .aviso-box {
+            background-color: #1f2731;
+            padding: 50px;
+            border: 2px solid #ff4655;
+            border-radius: 8px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .aviso-box h2 {
+            color: #ff4655;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .aviso-box p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: #ece8e1;
+        }
+
+        .btn-oficial {
+            display: inline-block;
+            background-color: #ff4655;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-oficial:hover {
+            background-color: #d13644;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">VALORANT <span>FAN</span></a>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="agentes.html">Agentes</a></li>
+            <li><a href="armas.html">Armas</a></li>
+            <li><a href="contacto.html">Contacto Dev</a></li>
+            <li><a href="registro.html" class="btn-registro">Registrarse</a></li>
+        </ul>
+    </nav>
+
+    <div class="registro-container">
+        <div class="aviso-box">
+            <i class="fas fa-shield-alt" style="font-size: 3rem; color: #ff4655; margin-bottom: 20px;"></i>
+            <h2>¡Atención Agente!</h2>
+            <p>
+                Por motivos de seguridad y privacidad, la creación de cuentas para el protocolo Valorant se gestiona únicamente en los servidores oficiales de <strong>Riot Games</strong>.
+            </p>
+            <p>
+                Haz clic en el botón a continuación para ser redirigido al portal oficial de registro de manera segura.
+            </p>
+            <a href="https://playvalorant.com/es-mx/" target="_blank" class="btn-oficial">
+                IR AL SITIO OFICIAL
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/valorantlatam/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/valorantlatam" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p class="footer-text">
+            © 2025 Valorant Project - <strong>Proyecto Universitario Académico</strong>
+        </p>
+    </footer>
+
+</body>
+</html>

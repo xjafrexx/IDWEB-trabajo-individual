@@ -1,0 +1,478 @@
+/* --- VARIABLES DE COLORES (Fácil de cambiar) --- */
+:root {
+    --rojo: #ff4655;          /* Rojo Valorant */
+    --oscuro: #0f1923;        /* Fondo principal */
+    --gris-oscuro: #1f2731;   /* Fondo de tarjetas */
+    --texto: #ece8e1;         /* Color de letra */
+    --borde: #333;            /* Color de bordes */
+}
+
+/* --- REGLAS GENERALES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* El padding no deforma las cajas */
+    font-family: sans-serif; /* Fuente estándar, limpia y segura */
+}
+
+body {
+    background-color: var(--oscuro);
+    background-image: url('../img/fondo.jpg');
+    background-size: cover;
+    background-attachment: fixed; /* La imagen no se mueve al bajar */
+    color: var(--texto);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- BARRA DE NAVEGACIÓN (NAV) --- */
+nav {
+    background-color: #111; /* Negro sólido */
+    border-bottom: 3px solid var(--rojo); /* Línea roja abajo */
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; /* Se queda pegada arriba */
+    top: 0;
+    z-index: 100; /* Asegura que esté por encima de todo */
+}
+
+nav .logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px; /* Separación entre letras */
+}
+nav .logo span { color: var(--rojo); }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #bbb;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s; /* Suaviza el cambio de color */
+}
+
+nav a:hover, nav a.activo {
+    color: var(--rojo);
+}
+
+.btn-registro {
+    background-color: var(--rojo);
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: white !important;
+}
+.btn-registro:hover {
+    background-color: white;
+    color: var(--rojo) !important;
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+main {
+    padding: 50px 10%;
+    text-align: center;
+    flex: 1;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    border-left: 6px solid var(--rojo);
+    display: inline-block;
+    padding-left: 20px;
+    letter-spacing: 1px;
+}
+
+/* --- BUSCADOR --- */
+.buscador-container {
+    margin: 0 auto 30px;
+    max-width: 500px;
+}
+
+.input-buscador {
+    width: 100%;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.5); /* Negro medio transparente */
+    border: 1px solid #555;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    text-align: center;
+}
+.input-buscador:focus {
+    border-color: var(--rojo);
+    outline: none; /* Quita el borde azul feo por defecto */
+}
+
+/* --- FILTROS (BOTONES) --- */
+.filtros-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Si no caben, bajan de línea */
+    margin-bottom: 40px;
+}
+
+.btn-filtro {
+    background: transparent;
+    border: 1px solid #555;
+    color: #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-filtro:hover, .btn-filtro.activo {
+    background-color: var(--rojo);
+    border-color: var(--rojo);
+    color: white;
+    transform: translateY(-3px); /* Pequeño salto hacia arriba */
+}
+
+/* --- TARJETAS DISEÑO "IMPACTO VISUAL" (Nuevo) --- */
+
+/* La rejilla (Grid) */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 35px; /* Más espacio entre tarjetas */
+    padding: 30px 0;
+}
+
+/* Diseño de la tarjeta */
+.card {
+    background-color: #0a0a0a; /* Fondo CASI negro para máximo contraste */
+    border: 1px solid #333;    /* Borde gris oscuro sutil */
+    /* Borde inferior ROJO GRUESO permanente (Toque Valorant) */
+    border-bottom: 4px solid var(--rojo);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.4s ease; /* Animación un poco más lenta y suave */
+    display: flex;
+    flex-direction: column;
+    /* Sombra inicial para dar profundidad */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+/* EFECTO AL PASAR EL MOUSE (EL CAMBIO NOTABLE) */
+.card:hover {
+    transform: translateY(-15px); /* Sube MUCHO más alto */
+    /* El borde gris se vuelve blanco brillante */
+    border-color: white;
+    /* Sombra roja intensa tipo neón debajo */
+    box-shadow: 0 15px 40px rgba(255, 70, 85, 0.4);
+}
+
+/* Área de la imagen */
+.card-img-container {
+    height: 280px; /* Un poco más alta */
+    /* Degradado vertical oscuro: más claro arriba, oscuro abajo */
+    background: linear-gradient(to bottom, #2a3540, #0a0a0a);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+/* Línea roja decorativa entre imagen y texto */
+.card-img-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--rojo); /* Línea roja fina */
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Sombra negra fuerte a la silueta del personaje/arma */
+    filter: drop-shadow(0 10px 10px black);
+    transition: 0.5s;
+}
+
+/* Zoom grande a la imagen al pasar el mouse */
+.card:hover img {
+    transform: scale(1.15); /* Crece un 15% */
+}
+
+/* Área de información (Texto) */
+.card-info {
+    padding: 25px;
+    text-align: left;
+    background-color: #111; /* Fondo negro sólido */
+    flex-grow: 1;
+}
+
+/* Título */
+.card-header h3 {
+    margin: 0 0 15px 0;
+    font-size: 28px; /* Letra MÁS GRANDE */
+    font-weight: 800; /* Letra MÁS GRUESA */
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 2px;
+}
+
+/* Etiqueta de Rol o Tipo */
+.agent-role {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--rojo); /* FONDO ROJO para la etiqueta */
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(255, 70, 85, 0.3); /* Brillo en la etiqueta */
+}
+
+.agent-role img {
+    width: 14px;
+    margin-right: 6px;
+    filter: invert(1) brightness(2); /* Icono blanco brillante */
+}
+
+/* Descripción */
+.card-desc {
+    font-size: 15px;
+    color: #bbb; /* Blanco hueso para leer fácil */
+    line-height: 1.7;
+}
+
+/* --- ESTILO CONTACTO (Diseño Unificado) --- */
+
+.contacto-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0; /* Sin espacio entre columnas para unirlas */
+    margin-top: 50px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6); 
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* 1. Columna Izquierda (Informacion) */
+.info-dev {
+    flex: 1;
+    min-width: 300px;
+    background-color: #0f1923; /* Fondo oscuro solido */
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid #333;
+}
+
+.info-dev h2 {
+    font-size: 30px;
+    color: white;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.info-dev p {
+    color: #999;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+/* Botones Sociales */
+.btn-social {
+    display: block;
+    padding: 16px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: white;
+    background-color: #1f2731; /* Gris oscuro */
+    border-radius: 6px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+    border-left: 4px solid transparent;
+    text-align: center;
+}
+
+.btn-social i { margin-right: 10px; }
+
+/* Efecto hover: linea de color a la izquierda */
+.whatsapp:hover { background-color: #1f2731; border-left-color: #25D366; color: #25D366; }
+.gmail:hover    { background-color: #1f2731; border-left-color: #EA4335; color: #EA4335; }
+
+/* 2. Columna Derecha (Formulario) */
+.form-container {
+    flex: 1.5; /* Mas ancho que el texto */
+    min-width: 320px;
+    background-color: rgba(0, 0, 0, 0.85); /* Fondo semi-transparente */
+    padding: 50px;
+}
+
+.form-container h3 {
+    color: white;
+    margin-bottom: 30px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* Inputs estilo moderno (solo borde inferior) */
+.campo { margin-bottom: 30px; }
+
+.campo label {
+    display: block;
+    color: var(--rojo);
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.campo input, 
+.campo textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: #1a1a1a;
+    border: none;
+    border-bottom: 2px solid #333;
+    color: white;
+    font-family: sans-serif;
+    font-size: 15px;
+    transition: 0.3s;
+    border-radius: 4px 4px 0 0;
+}
+
+/* Efecto al escribir */
+.campo input:focus, 
+.campo textarea:focus {
+    outline: none;
+    background-color: #222;
+    border-bottom-color: var(--rojo);
+}
+
+/* Boton Enviar */
+.btn-enviar {
+    width: 100%;
+    padding: 20px;
+    background-color: var(--rojo);
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.4s;
+    margin-top: 10px;
+}
+
+.btn-enviar:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 30px rgba(255, 70, 85, 0.4);
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: #050505;
+    padding: 30px;
+    text-align: center;
+    border-top: 1px solid #222;
+    margin-top: auto;
+}
+
+.footer-socials a {
+    color: #666;
+    font-size: 24px;
+    margin: 0 15px;
+    transition: 0.3s;
+}
+.footer-socials a:hover { color: var(--rojo); }
+
+/* --- CELULARES --- */
+@media (max-width: 768px) {
+    nav { flex-direction: column; gap: 15px; }
+    h1 { font-size: 30px; }
+}
+
+/* --- ESTILO ARMAS (Diseño Horizontal) --- */
+
+/* 1. Ajuste de la tarjeta */
+.pagina-armas .card {
+    background-color: #141414;
+    border-bottom: 4px solid #fff; /* Borde blanco */
+}
+
+/* Efecto Hover: Azul neón */
+.pagina-armas .card:hover {
+    border-color: #00ffff;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+    transform: translateY(-5px) scale(1.02);
+}
+
+/* 2. Fondo de la imagen */
+.pagina-armas .card-img-container {
+    height: 200px;
+    /* Fondo con líneas diagonales */
+    background: 
+        linear-gradient(rgba(20,20,20,0.9), rgba(20,20,20,0.9)),
+        repeating-linear-gradient(45deg, #333 0, #333 1px, transparent 0, transparent 10px);
+    border-bottom: 1px solid #444;
+}
+
+/* 3. Imagen del arma */
+.pagina-armas .card img {
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
+    padding: 15px;
+}
+
+/* Animación al pasar el mouse */
+.pagina-armas .card:hover img {
+    transform: scale(1.1) rotate(-3deg);
+    filter: drop-shadow(0 15px 15px rgba(0, 255, 255, 0.2));
+}
+
+/* 4. Título */
+.pagina-armas .card-header h3 {
+    font-size: 32px;
+    font-weight: 900;
+    font-style: italic;
+    color: #eee;
+}
+
+/* 5. Etiquetas de tipo */
+.pagina-armas .agent-role {
+    background-color: transparent;
+    border: 1px solid #666;
+    color: #888;
+}
+
+/* Brillo en la etiqueta al pasar el mouse */
+.pagina-armas .card:hover .agent-role {
+    border-color: #00ffff;
+    color: #00ffff;
+}
