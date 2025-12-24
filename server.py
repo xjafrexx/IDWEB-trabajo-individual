@@ -63,25 +63,23 @@ def registro():
 @app.route('/enviar-mensaje', methods=['POST'])
 def enviar_mensaje():
     if request.method == 'POST':
-    nombre = request.form['nombre']
-    presupuesto = float(request.form['presupuesto'])
-    correo = request.form['correo']
-    mensaje = request.form['mensaje']
+        nombre = request.form['nombre']
+        email = request.form['email']
+        mensaje = request.form['mensaje']
 
-    nuevo_mensaje = Mensaje(
-      nombre=nombre,
-      presupuesto=presupuesto,
-      correo=correo,
-      mensaje=mensaje
-    )
+        nuevo_mensaje = Mensaje(
+            nombre=nombre,
+            email=email,
+            mensaje=mensaje
+        )
 
-    try:
-      db.session.add(nuevo_mensaje)
-      db.session.commit()
-      return redirect(url_for('contacto'))
-    except Exception as e:
-      db.session.rollback()
-    return f"Ocurrió un error al enviar el mensaje: {e}"
+        try:
+            db.session.add(nuevo_mensaje)
+            db.session.commit()
+            return redirect(url_for('contacto'))
+        except Exception as e:
+            db.session.rollback()
+            return f"Ocurrió un error al enviar el mensaje: {e}"
 
 # Configuración para Render
 if __name__ == '__main__':
